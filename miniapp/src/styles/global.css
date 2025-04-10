@@ -1,0 +1,243 @@
+:root {
+  /* Telegram theme integration — fallback to dark premium */
+  --tg-bg: var(--tg-theme-bg-color, #0b0f19);
+  --tg-bg-secondary: var(--tg-theme-secondary-bg-color, #111827);
+  --tg-text: var(--tg-theme-text-color, #f1f5f9);
+  --tg-hint: var(--tg-theme-hint-color, rgba(255, 255, 255, 0.55));
+  --tg-link: var(--tg-theme-link-color, #8b5cf6);
+  --tg-btn: var(--tg-theme-button-color, #8b5cf6);
+  --tg-btn-text: var(--tg-theme-button-text-color, #ffffff);
+
+  --bg-primary: var(--tg-bg);
+  --bg-secondary: var(--tg-bg-secondary);
+  --bg-card: rgba(255, 255, 255, 0.04);
+  --bg-card-hover: rgba(255, 255, 255, 0.07);
+  --bg-card-border: rgba(255, 255, 255, 0.07);
+  --bg-elevated: rgba(255, 255, 255, 0.06);
+
+  --accent-purple: var(--tg-btn);
+  --accent-blue: #6366f1;
+  --accent-cyan: #22d3ee;
+  --accent-green: #34d399;
+  --accent-red: #f87171;
+  --accent-amber: #fbbf24;
+
+  --gradient-primary: linear-gradient(135deg, #8b5cf6 0%, #6366f1 50%, #3b82f6 100%);
+  --gradient-hero: linear-gradient(160deg, #1e1b4b 0%, var(--tg-bg) 40%, var(--tg-bg) 60%, #0f172a 100%);
+  --gradient-cyan: linear-gradient(135deg, #22d3ee 0%, #3b82f6 100%);
+  --gradient-green: linear-gradient(135deg, #34d399 0%, #059669 100%);
+  --gradient-red: linear-gradient(135deg, #f87171 0%, #dc2626 100%);
+  --gradient-card: linear-gradient(135deg, rgba(139, 92, 246, 0.08) 0%, rgba(99, 102, 241, 0.03) 100%);
+  --gradient-card-active: linear-gradient(135deg, rgba(34, 211, 238, 0.1) 0%, rgba(59, 130, 246, 0.05) 100%);
+
+  --glow-purple: 0 0 40px rgba(139, 92, 246, 0.15);
+  --glow-green: 0 0 40px rgba(52, 211, 153, 0.15);
+  --glow-blue: 0 0 40px rgba(99, 102, 241, 0.15);
+
+  --text-primary: var(--tg-text);
+  --text-secondary: var(--tg-hint);
+  --text-muted: rgba(255, 255, 255, 0.25);
+
+  --radius: 20px;
+  --radius-sm: 14px;
+  --radius-xs: 10px;
+
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(ellipse at 30% 20%, rgba(139, 92, 246, 0.06) 0%, transparent 50%),
+              radial-gradient(ellipse at 70% 80%, rgba(59, 130, 246, 0.04) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+#root {
+  position: relative;
+  z-index: 1;
+}
+
+::-webkit-scrollbar { width: 0; height: 0; }
+
+/* === Animations === */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 8px rgba(52, 211, 153, 0.3), 0 0 2px rgba(52, 211, 153, 0.8); }
+  50% { box-shadow: 0 0 16px rgba(52, 211, 153, 0.5), 0 0 4px rgba(52, 211, 153, 1); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes skeletonPulse {
+  0% { opacity: 0.06; }
+  50% { opacity: 0.12; }
+  100% { opacity: 0.06; }
+}
+
+@keyframes successPop {
+  0% { transform: scale(0); opacity: 0; }
+  60% { transform: scale(1.2); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes checkDraw {
+  0% { stroke-dashoffset: 36; }
+  100% { stroke-dashoffset: 0; }
+}
+
+.fade-in { animation: fadeIn 0.3s ease-out; }
+.slide-up { animation: slideUp 0.4s ease-out; }
+
+.slide-up-1 { animation: slideUp 0.35s cubic-bezier(0.21, 1.02, 0.73, 1) 0.05s both; }
+.slide-up-2 { animation: slideUp 0.35s cubic-bezier(0.21, 1.02, 0.73, 1) 0.1s both; }
+.slide-up-3 { animation: slideUp 0.35s cubic-bezier(0.21, 1.02, 0.73, 1) 0.15s both; }
+.slide-up-4 { animation: slideUp 0.35s cubic-bezier(0.21, 1.02, 0.73, 1) 0.2s both; }
+.slide-up-5 { animation: slideUp 0.35s cubic-bezier(0.21, 1.02, 0.73, 1) 0.25s both; }
+
+/* === Skeleton === */
+.skeleton {
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: var(--radius-xs);
+  animation: skeletonPulse 1.5s ease-in-out infinite;
+}
+
+.skeleton-text {
+  height: 14px;
+  margin-bottom: 8px;
+  border-radius: 6px;
+}
+
+.skeleton-text.short { width: 40%; }
+.skeleton-text.medium { width: 65%; }
+.skeleton-text.long { width: 90%; }
+
+.skeleton-circle {
+  border-radius: 50%;
+}
+
+.skeleton-card {
+  height: 100px;
+  border-radius: var(--radius);
+}
+
+/* === Error State === */
+.error-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px;
+  text-align: center;
+  gap: 16px;
+}
+
+.error-icon {
+  font-size: 48px;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.error-title {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.error-message {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  max-width: 280px;
+}
+
+/* === Success Overlay === */
+.success-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(11, 15, 25, 0.9);
+  backdrop-filter: blur(12px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+  gap: 20px;
+}
+
+.success-circle {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: var(--gradient-green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: successPop 0.5s cubic-bezier(0.21, 1.02, 0.73, 1);
+  box-shadow: 0 0 60px rgba(52, 211, 153, 0.3);
+}
+
+.success-check {
+  stroke-dasharray: 36;
+  stroke-dashoffset: 36;
+  animation: checkDraw 0.4s ease-out 0.3s forwards;
+}
+
+.success-title {
+  font-size: 22px;
+  font-weight: 700;
+  animation: fadeIn 0.3s ease-out 0.4s both;
+}
+
+.success-subtitle {
+  font-size: 14px;
+  color: var(--text-secondary);
+  animation: fadeIn 0.3s ease-out 0.5s both;
+}
