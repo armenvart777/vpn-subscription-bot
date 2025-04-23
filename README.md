@@ -45,3 +45,5 @@ go build -o bot ./cmd/...
 MIT
 
 <!-- v2 -->
+
+<!-- v3 -->
